@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Advanced GPT Chatbot</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .chatbox { max-width: 700px; margin: auto; }
+        textarea, input[type="submit"] { width: 100%; padding: 10px; margin-top: 10px; }
+        .message { margin-top: 10px; padding: 10px; border-radius: 5px; }
+        .user { background-color: #d4f0ff; }
+        .bot { background-color: #f0f0f0; }
+        .reset-btn { margin-top: 10px; display: block; text-align: right; }
+    </style>
+</head>
+<body>
+    <div class="chatbox">
+        <h2>Advanced GPT Chatbot</h2>
+        <form method="post">
+            <textarea name="message" rows="4" placeholder="Type your message..." required></textarea>
+            <input type="submit" value="Send">
+        </form>
+        <a href="/reset" class="reset-btn">Reset Chat</a>
+        <div>
+            {% for msg in history %}
+                <div class="message {{ 'user' if msg.role == 'user' else 'bot' }}">
+                    <strong>{{ msg.role.capitalize() }}:</strong> {{ msg.content }}
+                </div>
+            {% endfor %}
+            {% if response %}
+                <div class="message bot">
+                    <strong>Bot:</strong> {{ response }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
